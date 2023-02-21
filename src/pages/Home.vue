@@ -62,8 +62,9 @@ export default{
     })
 
       axios.get("/api/items")
-      .then(({data})=>{state.items=data;
-      console.log(JSON.stringify(state.items));});
+      .then(({data})=>{state.items=data
+      console.log(state.items);
+    });
 
    // const test = computed(()=>{return store.getters.filter.wineCategory})//store에서 가져온다. 왜 못가져와 lifecycleHooks 문제인듯...
     // console.log(test.value)
