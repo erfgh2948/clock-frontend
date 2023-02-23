@@ -61,7 +61,7 @@ export default{
         variety:[],winename:'',nation:[],price:[],matching:[],sugar:0,acidity:0,texture:0,tannin:0,scent:'',salesVolume:0
     })
 
-      axios.get("http://localhost:8080/items")
+      axios.get("https://localhost:8080/items")
       .then(({data})=>{state.items=data
       console.log(state.items);
     });
