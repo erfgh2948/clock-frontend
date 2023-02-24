@@ -15,8 +15,8 @@
 
 
 module.exports ={
-  devServer:'http://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app'
-  }
+  devServer:"http://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/"
+}
 
 
 
