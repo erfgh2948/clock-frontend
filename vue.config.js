@@ -1,15 +1,9 @@
 
 module.exports ={
   devServer:{
-    proxy:{      
-      target:'https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app',
-      changeOrigin:true,
-      pathRewrite:{
-        '^/':''
-      }
-    }
+    proxy:'https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app'
   }
-  }
+}
 
 
 
