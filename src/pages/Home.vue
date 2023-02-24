@@ -61,7 +61,7 @@ export default{
         variety:[],winename:'',nation:[],price:[],matching:[],sugar:0,acidity:0,texture:0,tannin:0,scent:'',salesVolume:0
     })
 
-      axios.get(`/items`)
+      axios.post('https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/items')
       .then(({data})=>{state.items=data
       console.log(state.items);
     });
