@@ -61,8 +61,8 @@ export default{
         variety:[],winename:'',nation:[],price:[],matching:[],sugar:0,acidity:0,texture:0,tannin:0,scent:'',salesVolume:0
     })
 
-    axios.get("java:8080/api/items")
-    //axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/items")
+    //axios.get("java:8080/api/items")
+    axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/items")
     .then(({data})=>{state.items=data
       console.log(state.items);
     });
