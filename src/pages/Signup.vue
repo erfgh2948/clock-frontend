@@ -48,7 +48,7 @@ export default {
           }
       })
       const submit = () => {
-          axios.post("/api/account/signup", state.form)
+          axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app//account/signup", state.form)
               .then(({data}) => {
                   console.log(data)
                   //중복체크로직 다시짜야함.

@@ -171,7 +171,7 @@ export default{
        itemsCopy5:[],
        itemsCopy6:[]
     })
-    axios.get("/api/wineList")
+    axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app//wineList")
     .then(({data})=>{
       statee.items=data;
       statee.items.sort((x,y)=>y.salesVolume-x.salesVolume)
