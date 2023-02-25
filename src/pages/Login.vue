@@ -50,7 +50,7 @@ export default {
         })
         const submit = () => {
             
-            axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/account/login", state.form)
+            axios.post("java:8080/api/account/login", state.form)
                 .then(res => {
                     store.commit('setAccount',  res.data)
                     console.log(res.data)
