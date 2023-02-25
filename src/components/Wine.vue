@@ -85,7 +85,7 @@ export default {
       // 그니까 여까지 왔다? 문제없이 로그인된 상태라는거임
 
       // 그 다음 단계인 카트db에 추가해주기
-      axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/cart/winesincart", this.wineCart)
+      axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/winesincart", this.wineCart)
        .then(({ data }) =>{
         window.alert(`${winenameko} 추가되었습니다! ${data}`);
         this.wineCart.flag=true
@@ -104,7 +104,7 @@ export default {
       this.wineCart.memberId = store.getters.getAccountId;
       if(this.wineCart.memberId==0)window.alert("로그인하세요!")
       else{
-       axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/cart/winesincart", this.wineCart)
+       axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/winesincart", this.wineCart)
        .then(({ data }) =>{
         console.log(data)
         window.alert(`${winenameko} 추가되었습니다! ${data}`);
@@ -122,7 +122,7 @@ export default {
     async deleteCart(itemNumber, winenameko){
       this.wineCart.wineId = await itemNumber;
       this.wineCart.memberId = store.getters.getAccountId;
-      axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/cart/winesincartdelete", this.wineCart)
+      axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/winesincartdelete", this.wineCart)
        .then(({ data }) =>{
         window.alert(`${winenameko} 삭제되었습니다! ${data}`);
         this.wineCart.flag=false
@@ -147,7 +147,7 @@ export default {
     });
 
     axios
-      .get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/wineList", state.form)
+      .get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/wineList", state.form)
       .then(({ data }) => {
         //wines 테이블 전체 데이터 가져오기
         state.allwinelist = data.length; //data row 수(list수)
@@ -178,7 +178,7 @@ export default {
     // 그래서 1번
     if( store.getters.getAccountId != 0 ) {
       axios
-      .get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/cart/winesincart") // 이거 왜 해당 계정의 카트목록만 오는겨? 백에 있는 그 token이 로그인할 때 유저 id값인가? ㅇㅇ맞는듯
+      .get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/winesincart") // 이거 왜 해당 계정의 카트목록만 오는겨? 백에 있는 그 token이 로그인할 때 유저 id값인가? ㅇㅇ맞는듯
       .then( ({data}) => {
         for( const inCartWine of data ) {
           // 전체 와인 목록에서 카트에 담겨있는 와인을 찾아서

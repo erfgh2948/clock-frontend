@@ -42,7 +42,7 @@ export default {
     const state = reactive({
       orders:[]
     })
-    axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/orders").then(({data})=>{
+    axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/orders").then(({data})=>{
       state.orders=[];
       for(let d of data){
         if(d.items) d.items=JSON.parse(d.items);
