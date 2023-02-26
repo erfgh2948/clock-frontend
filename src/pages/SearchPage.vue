@@ -185,6 +185,7 @@ const statee = reactive({
 });
 axios.get("/api/wineList").then(({ data }) => {
   statee.items = data;
+  console.log(data);
   statee.items.sort((x, y) => y.salesVolume - x.salesVolume);
   statee.itemsCopy1 = statee.items.splice(0, 5);
   statee.itemsCopy2 = statee.items.splice(0, 5);
