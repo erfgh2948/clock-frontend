@@ -34,22 +34,22 @@
           <div class="filter-container1">
             <span>당도</span>
             <div class="filter-grade">
-              <button v-for="i in 5" :key="i" :class="{on:colorChk2(i<=view.sugar)}"></button>
+              <button v-for="i in 5" :key="i" :class="{on:i<=view.sugar}"></button>
             </div>
             <span>산도</span>
             <div class="filter-grade">
-              <button v-for="i in 5" :key="i" :class="{on:colorChk2(i<=view.acidity)}"></button>
+              <button v-for="i in 5" :key="i" :class="{on:i<=view.acidity}"></button>
             </div>
           </div>
 
           <div class="filter-container2">
             <span>바디</span>
             <div class="filter-grade">
-              <button v-for="i in 5" :key="i" :class="{on:colorChk2(i<=view.texture)}"></button>
+              <button v-for="i in 5" :key="i" :class="{on:i<=view.texture}"></button>
             </div>
             <span>타닌</span>
             <div class="filter-grade">
-              <button v-for="i in 5" :key="i" :class="{on:colorChk2(i<=view.tannin)}"></button>
+              <button v-for="i in 5" :key="i" :class="{on:i<=view.tannin}"></button>
             </div>
           </div>
           <ul class="matching">
@@ -79,53 +79,46 @@ import {useRoute} from 'vue-router';
 import {reactive} from 'vue';
 import axios from "axios"
 import router from '@/scripts/router'
- 
 
-     const route=useRoute()
+const route=useRoute()
+// onMounted(() => { //route params 값이 잘 넘어 오는지 확인
+//   const id = route.params.number
+//   console.log(id)
+//   console.log(route.params)
+// })
+const state= reactive({
+  orders:[],
+  orders1:[],
+  level: {sweet: 0, body: 0, acidity: 0, tannin:0}
+})
 
-      // onMounted(() => { //route params 값이 잘 넘어 오는지 확인
-      //   const id = route.params.number
-      //   console.log(id)
-      //   console.log(route.params)
-      // })
-      const state= reactive({
-        orders:[],
-        orders1:[],
-        level: {sweet: 0, body: 0, acidity: 0, tannin:0}
-      })
-
-      axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/wineList", state.form)
-      .then(({data}) => { //wines 테이블 전체 데이터 가져오기
-        // console.log(data[route.params.number -1].winename)
-        // console.log(data[route.params.number -1].winename)
-        // state.orders.push(data[route.params.number -1]);
-        for(const item of data){
-          item.variety = item.variety.substring(0,item.variety.indexOf('(')); //variety (영문) 제거
-          item.producer = item.producer.replace('(', ' ') // '(' 공백으로 치환
-          item.producer = item.producer.replace(')','') // ')' 제거
-          item.winenameko = item.winename.substring(0,item.winename.indexOf('(')) // 와인한글이름만 추출
-          item.winenameen = item.winename.substring(item.winename.indexOf('('),item.winename.indexOf(')')) // 와인영문이름 추출
-          item.winenameen = item.winenameen.replace('(','') //와인 영문이름 '(' 제거
-          item.price = item.price.toFixed(0).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','); //뒷자리 3자리수 콤마(,) 사용
-          
-          state.orders.push(item); //ordues이름의 배열로 지정
-        }
-        state.orders1.push(state.orders[route.params.number -1])
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-      });
-        
-      const back=()=>{
-        router.push({path:"/searchpage"})
-      }
-      
-    const colorChk2=(tf, lv)=>{
-      console.log(lv)
-      return tf
-    }
+axios.get("/api/wineList", state.form)
+.then(({data}) => { //wines 테이블 전체 데이터 가져오기. 
+  // console.log(data[route.params.number -1].winename)
+  // console.log(data[route.params.number -1].winename)
+  // state.orders.push(data[route.params.number -1]);
+  for(const item of data){
+    item.variety = item.variety.substring(0,item.variety.indexOf('(')); //variety (영문) 제거
+    item.producer = item.producer.replace('(', ' ') // '(' 공백으로 치환
+    item.producer = item.producer.replace(')','') // ')' 제거
+    item.winenameko = item.winename.substring(0,item.winename.indexOf('(')) // 와인한글이름만 추출
+    item.winenameen = item.winename.substring(item.winename.indexOf('('),item.winename.indexOf(')')) // 와인영문이름 추출
+    item.winenameen = item.winenameen.replace('(','') //와인 영문이름 '(' 제거
+    item.price = item.price.toFixed(0).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','); //뒷자리 3자리수 콤마(,) 사용
+    
+    state.orders.push(item); //orders이름의 배열로 지정
+  }
+  state.orders1.push(state.orders[route.params.number -1])
+})
+.catch((error) => {
+  console.log(error);
+})
+.finally(() => {
+});//api를 만들어두지 않았기때문. route.params를 미리 주어 db에서 검색후 해당 row만 가져오도록 api필요:/api/wineList/{route.params.number}
+  
+const back=()=>{
+  router.push({path:"/searchpage"})
+}
     
 
 </script>
@@ -304,6 +297,16 @@ import router from '@/scripts/router'
     border-radius: 4px;
     background-color: #c70039;
   }
+    /* 맛 선택버튼 색 */
+    .filter-grade .on{
+    border-color: #fff;
+    background-color: #c70039;
+  }
+  .filter-grade .on:nth-child(1) {opacity:0.25;}
+  .filter-grade .on:nth-child(2) {opacity:0.4;}
+  .filter-grade .on:nth-child(3) {opacity:0.55;}
+  .filter-grade .on:nth-child(4) {opacity:0.75;}
+  .filter-grade .on:nth-child(5) {opacity:1;}
 }
 @media screen and (max-width:600px) {
   /* 배너 */
@@ -477,5 +480,15 @@ import router from '@/scripts/router'
     border-radius: 4px;
     background-color: #c70039;
   }
+    /* 맛 선택버튼 색 */
+    .filter-grade .on{
+    border-color: #fff;
+    background-color: #c70039;
+  }
+  .filter-grade .on:nth-child(1) {opacity:0.25;}
+  .filter-grade .on:nth-child(2) {opacity:0.4;}
+  .filter-grade .on:nth-child(3) {opacity:0.55;}
+  .filter-grade .on:nth-child(4) {opacity:0.75;}
+  .filter-grade .on:nth-child(5) {opacity:1;}
 }
 </style>
