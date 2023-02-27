@@ -92,7 +92,7 @@ const state= reactive({
   level: {sweet: 0, body: 0, acidity: 0, tannin:0}
 })
 
-axios.get("/api/wineList", state.form)
+axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/wineList", state.form)
 .then(({data}) => { //wines 테이블 전체 데이터 가져오기. 
   // console.log(data[route.params.number -1].winename)
   // console.log(data[route.params.number -1].winename)
