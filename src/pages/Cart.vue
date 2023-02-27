@@ -77,7 +77,7 @@ getWinesFromCart();
 
 const deleteCart = async (itemNumber, winenameko)=>{
     const proxyCart = {wineId:itemNumber,memberId:store.getters.getAccountId};
-    await axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/cart/winesincartdelete", proxyCart)
+    await axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/winesincartdelete", proxyCart)
       .then(({ data }) =>{
       // window.alert(`${winenameko} 삭제되었습니다! ${data}`);
       console.log(data,winenameko)
