@@ -178,9 +178,10 @@ export default {
     // 2. Vuex 의 store에 카트목록을 저장/로드 한다. - 작업양 좀 있. 카트는 이미 DB 저장/로드 방식으로 작업된 상태에서 store?
     // 그래서 1번
     if( store.getters.getAccountId != 0 ) {
-      axios
-      .get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/winesincart") 
+      console.log("get /api/cart/winesincart");
+      axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/winesincart") 
       .then( ({data}) => {
+        console.log(data);
         for( const inCartWine of data ) {
           // 전체 와인 목록에서 카트에 담겨있는 와인을 찾아서
           let findwine = state.orders.find(wine=> { return wine.number == inCartWine.wineId } );
