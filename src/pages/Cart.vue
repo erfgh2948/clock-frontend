@@ -49,7 +49,7 @@ const state = reactive({
 })
 
 const getWinesFromCart = async ()=>{
-  await axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/cart/winesincart")//현재 카트에 들어가잇는 모든목록 요청
+  await axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/winesincart")//현재 카트에 들어가잇는 모든목록 요청
       .then(({ data }) =>{
       state.wineCart=data
       const uniqueCart =  state.wineCart.filter((wine, idx, arr)=>{
@@ -58,7 +58,7 @@ const getWinesFromCart = async ()=>{
       })
       .catch(error=>{console.log(error)})
 
-      await axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/cart/wines",state.wineIds)//비동기처리된 axios로 다시 wineIds의 wine들 요청\
+      await axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/cart/wines",state.wineIds)//비동기처리된 axios로 다시 wineIds의 wine들 요청\
       .then(({data})=>{
         state.list = data.length //data row 수(list수)
         for(const item of data){
