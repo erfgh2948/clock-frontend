@@ -49,7 +49,7 @@ export default {
             }
         })
         const submit = () => {
-            
+            axios.defaults.withCredentials = true;
             axios.post("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/account/login", state.form)
                 .then(res => {
                     store.commit('setAccount',  res.data)
