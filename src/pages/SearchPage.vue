@@ -183,7 +183,7 @@ const statee = reactive({
   itemsCopy5: [],
   itemsCopy6: [],
 });
-axios.get("/api/wineList").then(({ data }) => {
+axios.get("https://port-0-wine-backend-4uvg2mledushse.sel3.cloudtype.app/api/wineList").then(({ data }) => {
   console.log(data);
   statee.items = data;
   statee.items.sort((x, y) => y.salesVolume - x.salesVolume);
